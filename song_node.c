@@ -13,21 +13,21 @@ struct SongNode {
 };
 
 struct SongNode* insert_front(struct SongNode* start, struct Song* song) {
-    struct SongNode *newSongNode = (struct SongNode*)malloc(sizeof(struct SongNode));
+    struct SongNode *newSongNode = (struct SongNode*)malloc(16);
     newSongNode->song = song;
     newSongNode->next = start;
     return newSongNode;
 }
 
 struct SongNode* insert_ordered(struct SongNode* start, struct Song* song) {
-  if(strcmp(song->name, start->song->name) <= 0) {
+  if(start == NULL || strcmp(song->name, start->song->name) <= 0) {
     return insert_front(start, song);
   }
-  SongNode *last = start;
-  SongNode *iter = start->next;
+  struct SongNode *last = start;
+  struct SongNode *iter = start->next;
   while(iter != NULL) {
     if(strcmp(song->name, iter->song->name) <= 0) {
-      SongNode *new = insert_front(iter, song);
+      struct SongNode *new = insert_front(iter, song);
       last->next = new;
     }
   }
@@ -63,11 +63,15 @@ struct Song *newSong(char *artist, char *name) {
 }
 
 int main() {
-  char name[6] = "a song";
-  char artist[7] = "a guy";
-  struct Song *s1 = newSong(artist, name);
-  struct SongNode *sn1 = insert_front(NULL, s1);
-  sn1 = insert_front(sn1, s1);
+  struct Song *s1 = newSong("a guy", "some song");
+  struct SongNode *sn1 = insert_ordered(NULL, s1);
+  sn1 = insert_ordered(sn1, s1); //two copies
+  print_list(sn1);
+  struct Song *s2 = newSong("other guy", "another song");
+  sn1 = insert_ordered(sn1, s2);
+  printf("inserted 2");
+  struct Song *s3 = newSong("other guy", "his other song");
+  sn1 = insert_ordered(sn1, s3);
   print_list(sn1);
   sn1 = free_list(sn1);
   print_list(sn1);
