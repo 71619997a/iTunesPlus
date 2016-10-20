@@ -27,7 +27,13 @@ SongNode* insert_ordered(SongNode* start, SongNode* new) {
             last->next = ins;
             break;
         }
-        iter = start->next;
+        last = iter;
+        iter = iter->next;
+
+    }
+    if(iter == NULL) {
+        SongNode *ins = insert_front(iter, new);
+        last->next = ins;
     }
     return start;
 }
@@ -45,10 +51,9 @@ SongNode* free_list(SongNode* start) {
 
 void print_list(SongNode* start) {
     if(start == NULL || start->song == NULL) {
-        printf("NULL\n");
         return;
     }
-    printf("\"%s\" by %s -> ", start->song->name, start->song->artist);
+    printf("\"%s\" by %s\n", start->song->name, start->song->artist);
     print_list(start->next);
 }
 
@@ -75,6 +80,7 @@ SongNode *by_artist(SongNode *start, char *artist) {
     return start;
 }
 
+/*
 int main() {
     setbuf(stdout, NULL);  // for debug
     Song *s1 = new_song("a guy", "some song");
@@ -92,3 +98,4 @@ int main() {
     sn1 = free_list(sn1);
     print_list(sn1);
 }
+*/

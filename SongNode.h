@@ -8,7 +8,7 @@ typedef struct SongNode {
     Song *song;
     struct SongNode *next;
 } SongNode;
-int main();
+//int main();
 Song *new_song(char *artist,char *name);
 void print_list(SongNode *start);
 SongNode *free_list(SongNode *start);
