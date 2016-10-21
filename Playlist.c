@@ -97,7 +97,24 @@ void print_all() {
     }
 }
 
+void remove_song(Song* rem) {
+    char index = artist_index(rem->artist[0]);
+    SongNode *iter = table[index];
+    SongNode *bad = by_name(iter, rem->name);
+    if(bad != NULL && bad->song == rem) {
+        table[index] = remove_node(iter, bad);
+    }
+}
+
+void remove_all(){
+    char i;
+    for(i=0;i<26;i++){
+        table[index] = free_list(table[index]);
+    }
+}
+
 int main() {
+    sranddev();
     initializeTable();
     setbuf(stdout, NULL);
     addSong(new_song("bob boy", "the greatest"));
