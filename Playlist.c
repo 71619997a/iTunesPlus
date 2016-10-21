@@ -67,10 +67,12 @@ void print_songs(Song **songs) {  // songs is a pointer to an array of pointers
     }
 }
 
-SongNode* shuffle(SongNode *start){
+SongNode* shuffle(SongNode* start){
+  //SongNode header = (SongNode*) malloc(sizeof(SongNode));
   SongNode *header = remove_node(start, random_Song(start));
   SongNode *curr = header;
   while(length(start) != 0){
+    //SongNode *holder = (SongNode*) malloc(sizeof(SongNode));
     SongNode *holder = random_Song(start);
     if (holder == start){
       start = start->next;
@@ -110,12 +112,12 @@ void remove_song(Song* rem) {
 void remove_all(){
     char i;
     for(i=0;i<26;i++){
-        table[i] = free_list(table[i]);
+        table[index] = free_list(table[index]);
     }
 }
 
 int main() {
-  srand(time(NULL));
+    sranddev();
     initializeTable();
     setbuf(stdout, NULL);
     addSong(new_song("bob boy", "the greatest"));
