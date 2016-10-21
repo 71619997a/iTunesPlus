@@ -2,6 +2,45 @@
 #include <stdlib.h>
 #include <string.h>
 #include "SongNode.h"
+//used for random
+
+int length(SongNode* kyle){
+  int x = 1;
+  while (kyle->next != NULL){
+    x++;
+    kyle = kyle->next;
+  }
+  return x;
+}
+SongNode *remove_node(SongNode* start, SongNode* removed){
+  if (start == removed){
+    SongNode *new = start->next;
+    start->next = NULL;
+    free_list(start);
+    return new;
+  }
+
+  SongNode *orig = start;
+  while (start->next != removed){
+    start = start->next;
+  }
+
+  SongNode *newnext = start->next->next;
+  start->next->next = NULL;
+  free_list(start->next);
+  start->next = start->next->next;
+  return orig;
+}
+
+SongNode* random_Song(SongNode* start){
+  int x = rand() % length(start);
+  SongNode *curr = start;
+  while (x != 0){
+    x--;
+    curr = curr->next;
+  }
+  return curr;
+}
 
 SongNode* from_song(Song* song) {
     SongNode *newSN = (SongNode*) malloc(sizeof(SongNode));
@@ -36,7 +75,13 @@ SongNode* insert_ordered(SongNode* start, SongNode* new) {
             last->next = ins;
             break;
         }
-        iter = start->next;
+        last = iter;
+        iter = iter->next;
+
+    }
+    if(iter == NULL) {
+        SongNode *ins = insert_front(iter, new);
+        last->next = ins;
     }
     return start;
 }
@@ -54,10 +99,9 @@ SongNode* free_list(SongNode* start) {
 
 void print_list(SongNode* start) {
     if(start == NULL || start->song == NULL) {
-        printf("NULL\n");
         return;
     }
-    printf("\"%s\" by %s -> ", start->song->name, start->song->artist);
+    printf("\"%s\" by %s\n", start->song->name, start->song->artist);
     print_list(start->next);
 }
 
@@ -84,6 +128,7 @@ SongNode *by_artist(SongNode *start, char *artist) {
     return start;
 }
 
+/*
 int main() {
     setbuf(stdout, NULL);  // for debug
     Song *s1 = new_song("a guy", "some song");
@@ -106,3 +151,4 @@ int main() {
     sn1 = free_list(sn1);
     print_list(sn1);
 }
+*/
