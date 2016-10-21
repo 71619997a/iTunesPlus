@@ -19,10 +19,12 @@ SongNode *remove_node(SongNode* start, SongNode* removed){
     free_list(start);
     return new;
   }
+
   SongNode *orig = start;
   while (start->next != removed){
     start = start->next;
   }
+
   SongNode *newnext = start->next->next;
   start->next->next = NULL;
   free_list(start->next);
@@ -39,6 +41,7 @@ SongNode* random_Song(SongNode* start){
   }
   return curr;
 }
+
 SongNode* from_song(Song* song) {
     SongNode *newSN = (SongNode*) malloc(sizeof(SongNode));
     newSN->song = song;

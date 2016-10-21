@@ -66,6 +66,11 @@ void print_songs(Song **songs) {  // songs is a pointer to an array of pointers
         songs++;
     }
 }
+
+SongNode* reomve_song(char name[]){
+    return remove_node(index[], find_songs(name, NAME));
+}
+
 SongNode* shuffle(SongNode *start){
   SongNode *header = remove_node(start, random_Song(start));
   SongNode *curr = header;
@@ -135,4 +140,8 @@ int main() {
     print_songs(find_songs("not a boy", ARTIST));
     printf("\nPrint the song \"this song is not a song\":");
     print_songs(find_songs("this song is not a song", NAME));
+    printf("shuffling");
+    shuffle(table[0]);
+    print_all;
+
 }
