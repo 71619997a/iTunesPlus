@@ -12,15 +12,22 @@ int length(SongNode* kyle){
   }
   return x;
 }
-void remove_node(SongNode* start, SongNode* removed)`{
-  if (start->Song->name == removed->Song->name){
+SongNode *remove_node(SongNode* start, SongNode* removed){
+  if (start == removed){
+    SongNode *new = start->next;
     start->next = NULL;
-    start->Song = NULL;
+    free_list(start);
+    return new;
   }
-  while (start->next->Song->name != removed->Song->name){
+  SongNode *orig = start;
+  while (start->next != removed){
     start = start->next;
   }
+  SongNode *newnext = start->next->next;
+  start->next->next = NULL;
+  free_list(start->next);
   start->next = start->next->next;
+  return orig;
 }
 
 SongNode* random_Song(SongNode* start){
@@ -30,7 +37,7 @@ SongNode* random_Song(SongNode* start){
     x--;
     curr = curr->next;
   }
-  return x;
+  return curr;
 }
 SongNode* from_song(Song* song) {
     SongNode *newSN = (SongNode*) malloc(sizeof(SongNode));
