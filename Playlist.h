@@ -8,5 +8,8 @@ Song **find_songs(char, characteristic);
 void print_songs(Song **);
 void print_by_letter(char);
 void print_all();
+SongNode *shuffle(SongNode *);
+void remove_song(Song *);
+void remove_all();
 int main();
 #endif
