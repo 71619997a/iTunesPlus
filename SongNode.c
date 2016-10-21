@@ -12,7 +12,16 @@ int length(SongNode* kyle){
   }
   return x;
 }
-new
+void remove_node(SongNode* start, SongNode* removed)`{
+  if (start->Song->name == removed->Song->name){
+    start->next = NULL;
+    start->Song = NULL;
+  }
+  while (start->next->Song->name != removed->Song->name){
+    start = start->next;
+  }
+  start->next = start->next->next;
+}
 
 SongNode* random_Song(SongNode* start){
   int x = rand() % length(start);
