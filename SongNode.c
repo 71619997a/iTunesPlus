@@ -15,6 +15,15 @@ SongNode* insert_front(SongNode* start, SongNode* new) {
     return new;
 }
 
+// usage: go to node before removal
+// node->next = remove_front(node->next);
+SongNode *remove_front(SongNode* start) {
+    SongNode *newStart = start->next;
+    start->next = NULL;
+    free_list(start);
+    return newStart;
+}
+
 SongNode* insert_ordered(SongNode* start, SongNode* new) {
     if(start == NULL || strcmp(new->song->name, start->song->name) <= 0) {
         return insert_front(start, new);
@@ -86,9 +95,14 @@ int main() {
     print_list(sn1);
     Song *s3 = new_song("other guy", "his other song");
     sn1 = insert_ordered(sn1, from_song(s3));
+    Song *s4 = new_song("me", "zyzzva is the last word in the alphabet sometimes");
+    sn1 = insert_ordered(sn1, from_song(s4));
     print_list(sn1);
-    print_list(by_name(sn1, "his other song"));
     print_list(by_artist(sn1, "a guy"));
+    SongNode *other = by_name(sn1, "his other song");
+    print_list(other);
+    other->next = remove_front(other->next);
+    print_list(sn1);
     sn1 = free_list(sn1);
     print_list(sn1);
 }
