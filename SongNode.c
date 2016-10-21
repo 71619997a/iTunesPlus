@@ -2,7 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include "SongNode.h"
+//used for random
 
+int length(SongNode* kyle){
+  int x = 1;
+  while (kyle->next != NULL){
+    x++;
+    kyle = kyle->next;
+  }
+  return x;
+}
+new
+
+SongNode* random_Song(SongNode* start){
+  int x = rand() % length(start);
+  SongNode *curr = start;
+  while (x != 0){
+    x--;
+    curr = curr->next;
+  }
+  return x;
+}
 SongNode* from_song(Song* song) {
     SongNode *newSN = (SongNode*) malloc(sizeof(SongNode));
     newSN->song = song;
