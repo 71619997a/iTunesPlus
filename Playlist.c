@@ -67,10 +67,6 @@ void print_songs(Song **songs) {  // songs is a pointer to an array of pointers
     }
 }
 
-SongNode* reomve_song(char name[]){
-    return remove_node(index[], find_songs(name, NAME));
-}
-
 SongNode* shuffle(SongNode *start){
   SongNode *header = remove_node(start, random_Song(start));
   SongNode *curr = header;

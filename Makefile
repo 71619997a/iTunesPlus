@@ -1,10 +1,10 @@
 all: run
-    
+
 run: compile
-    ./a.out
+	./a.out
 
 compile:
-    gcc SongNode.c Playlist.c
+	gcc SongNode.c Playlist.c
 
 clean:
-    rm a.out
+	rm a.out
