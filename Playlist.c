@@ -66,7 +66,24 @@ void print_songs(Song **songs) {  // songs is a pointer to an array of pointers
         songs++;
     }
 }
+SongNode* shuffle(SongNode *start){
+  SongNode *header = remove_node(start, random_Song(start));
+  SongNode *curr = header;
+  while(length(start) != 0){
+    SongNode holder = random_Song(start);
+    if (holder == start){
+      start = start->next;
+      curr->next = holder;
+      curr = curr->next;
+    }
+    else{
+      curr->next = remove_node(holder);
+      curr = curr->next;
+    }
+  }
+  return header;
 
+}
 void print_by_letter(char letter) {
     char index = artist_index(letter);
     print_list(table[index]);
