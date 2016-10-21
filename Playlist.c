@@ -71,7 +71,7 @@ SongNode* shuffle(SongNode *start){
   SongNode *header = remove_node(start, random_Song(start));
   SongNode *curr = header;
   while(length(start) != 0){
-    SongNode holder = random_Song(start);
+    SongNode *holder = random_Song(start);
     if (holder == start){
       start = start->next;
       curr->next = holder;
@@ -110,12 +110,12 @@ void remove_song(Song* rem) {
 void remove_all(){
     char i;
     for(i=0;i<26;i++){
-        table[index] = free_list(table[index]);
+        table[i] = free_list(table[i]);
     }
 }
 
 int main() {
-    sranddev();
+  srand(time(NULL));
     initializeTable();
     setbuf(stdout, NULL);
     addSong(new_song("bob boy", "the greatest"));
