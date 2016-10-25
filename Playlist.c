@@ -1,3 +1,5 @@
+// BY GABRIEL MARKS AND NIELS GRAHAM
+
 #import <stdlib.h>
 #import <stdio.h>
 #import "SongNode.h"
